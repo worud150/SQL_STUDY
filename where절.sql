@@ -40,6 +40,13 @@ WHERE active = 1
 GROUP BY store_id
 HAVING COUNT(*) >= 300;
 
+
+
+
+
+
+
+
 -- study
 
 SELECT actor_id, first_name,last_name
@@ -116,6 +123,13 @@ ON c.customer_id = r.customer_id
 WHERE DATE(r.rental_date) = '2005-06-14'
 ORDER BY c.email; -- 정렬하기
 
+
+
+
+
+
+
+
 -- rental 정보 2004,2005년을 제외한 정보를 보고싶다.
 
 SELECT *
@@ -165,14 +179,83 @@ SELECT title, rating
 FROM film 
 WHERE rating NOT IN  ('PG-13', 'R', 'NC-17');
 
-SELECT mid('abcdefg', 2, 3)
-left('abcdefg', 2)
-right('abcdefg', 2);
+SELECT 
+mid('abcdefg', 2, 3);
 
+SELECT 
+LEFT ('abcdefg', 2);
+
+SELECT 
+RIGHT ('abcdefq', 2);
 
 SELECT *
 FROM customer
 WHERE LEFT (last_name, 1) = 'Q';
+
+SELECT *
+FROM customer
+WHERE last_name LIKE 'Q%';
+
+-- amount는 판매금액, 직원별 평균 판매금액의 대해 알아내보자.
+-- GROUP BY절 실습
+SELECT staff_id, 
+AVG (amount)
+FROM payment
+GROUP BY staff_id;
+
+-- amount는 판매금액, 직원별 평균 판매금액과 직원이름의 대해 알아내보자.
+SELECT p.staff_id, AVG(p.amount) AS avg_amount, 
+		 s.first_name, s.last_name
+FROM payment p 
+INNER JOIN staff s
+ON p.staff_id = s.staff_id
+GROUP BY p.staff_id;
+
+
+-- 직원 남녀 숫자 알고 싶음.
+SELECT gender, COUNT(*)
+FROM employees
+GROUP BY gender;
+
+-- 직원사번 이름 성 현재 부서까지 나타내기 
+SELECT *
+FROM employees;
+
+SELECT *
+FROM titles;
+
+
+SELECT b.emp_no, t.dept_name, b.first_name,b.last_name,a.dept_no
+FROM dept_emp a
+INNER JOIN employees b
+ON a.emp_no = b.emp_no
+INNER JOIN departments t
+ON a.dept_no = t.dept_no
+WHERE a.to_date = '9999-01-01';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
