@@ -13,7 +13,7 @@ CREATE TABLE t_test(
 );
 
 DROP TABLE t_test;
-
+-- INSERT
 INSERT INTO t_test
 (nm, jumin, age, addr)
 VALUES
